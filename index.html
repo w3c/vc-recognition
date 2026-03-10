@@ -739,10 +739,45 @@ publishes an European Union ETSI Trust Services list [[ETSI-TRUST-LISTS]].
     </section>
 
     <section>
+      <h2>Privacy Considerations</h2>
+
+      <p>
+This section details the general privacy considerations and specific privacy
+implications of deploying this specification into production environments.
+      </p>
+
+      <p>
+Readers are urged to familiarize themselves with the general privacy advice
+provided in the
+<a data-cite="VC-DATA-MODEL#privacy-considerations">
+Privacy Considerations section of the Verifiable Credentials specification</a>
+before reading this section.
+      </p>
+    </section>
+
+    <section>
       <h2>Security Considerations</h2>
 
       <p>
-This recommendation specifies a data model for trusted lists of verifiable issuers and verifiers but it does not say how such lists should be secured. Other recommendations will specify the security mechanisms that may be used. One security mechanism may be to encapsulate the list as a verifiable credential, signed by the list operator, and a non-normative example of this is given in Section 5. Another mechanism may be for the list operator to issue the list as a JWT. In other eco-systems a block chain may be used to publish the list.
+There are a number of security considerations that implementers should be
+aware of when processing data described by this specification. Ignoring or
+not understanding the implications of this section can result in
+security vulnerabilities.
+      </p>
+
+      <p>
+Readers are urged to familiarize themselves with the general
+security advice provided in the
+<a data-cite="VC-DATA-MODEL#security-considerations">
+Security Considerations section of the Verifiable Credentials
+specification</a> before reading this section.
+      </p>
+
+      <p>
+While this section attempts to highlight a broad set of security
+considerations, it is not a complete list. Implementers are urged to seek the
+advice of security and cryptography professionals when implementing mission
+critical systems using the technology outlined in this specification.
       </p>
 
     </section>
