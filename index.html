@@ -780,6 +780,36 @@ advice of security and cryptography professionals when implementing mission
 critical systems using the technology outlined in this specification.
       </p>
 
+      <section>
+        <h3>Validate Before Sharing</h3>
+        <p>
+When a [=holder=] receives a `VerifiableRecognitionCredential` and shares it
+with others, there is a risk that the credential has not been properly vetted.
+A malicious or negligent actor could craft a `VerifiableRecognitionCredential`
+that lists fraudulent or compromised entities as recognized issuers or
+verifiers, and propagate it peer-to-peer across an ecosystem. Recipients who
+accept and act upon such a credential without independent verification might
+unknowingly accept [=verifiable credentials=] from untrustworthy sources,
+exposing themselves and others to fraud, data breaches, or credential
+forgery. The decentralized nature of this specification, while a strength,
+amplifies this risk: a single unvetted credential shared widely can rapidly
+corrupt the trust assumptions of many parties in an ecosystem.
+        </p>
+        <p>
+To mitigate these dangers, deployments are expected to independently verify the
+cryptographic integrity and provenance of any `VerifiableRecognitionCredential`
+before acting upon it or sharing it further. This includes confirming that the
+[=issuer=] of the credential is a party the implementer has an established
+reason to trust for the given recognition domain, and that the credential has
+not expired or been revoked. Implementers cannot rely solely on the fact
+that a peer has already accepted a credential as evidence of its validity.
+Instead, a [=verifier=]] needs to vet the issuer of the recognition credential
+as well as the recognized action independently of receiving the
+`VerifiableRecognitionCredential` and can only depend on information from the
+credential once trust has been established on the issuing entity.
+        </p>
+      </section>
+
     </section>
 
     <section class="appendix informative">
