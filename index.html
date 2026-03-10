@@ -221,9 +221,62 @@ not fit for production deployment.
     <section>
       <h2>Introduction</h2>
 
-      <p class="issue" title="Write introduction">
-Introduction to be written...
+      <p>
+The [=verifiable credential=] ecosystem relies on the ability of [=verifiers=]
+to determine whether a particular [=issuer=] is recognized to perform a
+particular action, such as [=issuer|issuing=] a certain type of [=verifiable
+credential=]. Historically, this determination is often made through out-of-band
+processes, bilateral agreements, or proprietary registries that are difficult to
+discover, query, or reason about in an automated way. As [=verifiable
+credentials=] are deployed across sectors such as education, healthcare,
+financial services, and government, the need for a standardized, interoperable
+mechanism to express and communicate recognition of entities that perform known
+actions has become critical. Without such a mechanism, ecosystem participants
+are forced to build bespoke "trust infrastructure", leading to fragmentation,
+increased integration costs, and barriers to cross-border and cross-sector
+interoperability.
       </p>
+
+      <p>
+This specification addresses the challenge of expressing recognized entities,
+such as people and organizations, and the actions they perform, such as issuing
+and verifying, in a decentralized manner by defining a data model that any
+entity can use to publish or share recognition information as a [=verifiable
+credential=]. Rather than mandating a single central registry, the model allows
+any entity — a government body, an industry consortium, a standards
+organization, or even a single individual — to issue a
+`VerifiableRecognitionCredential` asserting that they know of one or more
+entities that are recognized to perform specific actions. This design enables a
+web of overlapping, competing, and complementary "trust registries" to coexist,
+allowing ecosystem participants to choose the entities they trust and to reason
+across multiple registries. The specification also supports interoperability
+with existing "trust infrastructure", such as X.509 certificate authority lists
+and ETSI Trust Service Lists, allowing existing recognized entity information to
+be referenced and composed into new decentralized ecosystems.
+      </p>
+
+      <p>
+Readers that are interested in the variety of use cases supported by this
+specification are urged to read the
+<a href="use-cases.html">use cases document</a>. The remainder of this document
+is organized into the following sections:
+      </p>
+
+      <ul>
+        <li>
+Section [[[#data-model]]] defines the core data model, including the
+`RecognizedEntity`, `RecognizedAction`, and `VerifiableRecognitionCredential`
+types along with their properties and worked examples.
+        </li>
+        <li>
+Section [[[#security-considerations]]] discusses security considerations
+relevant to implementers of this specification.
+        </li>
+        <li>
+Section [[[#privacy-considerations]]] discusses privacy considerations
+relevant to implementers of this specification.
+        </li>
+      </ul>
 
       <section id="conformance">
         <p>
