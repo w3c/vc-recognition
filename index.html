@@ -882,6 +882,173 @@ credential once trust has been established on the issuing entity.
     </section>
 
     <section class="appendix informative">
+      <h2>Relationship to Other Technologies</h2>
+
+      <p>
+This specification was designed with awareness of existing "trust
+infrastructure" technologies, three of which are described below. The data model
+defined in this specification is capable of expressing many of the concepts
+found in these technologies and is designed to interoperate with them via the
+`recognizedIn` property.
+      </p>
+
+      <section class="informative">
+        <h3>ETSI Trust Service Lists</h3>
+
+        <p>
+The European Telecommunications Standards Institute (ETSI) defines a format
+for Trust Service Lists (TSLs) in [[?ETSI-TRUST-LISTS]], which is used across
+the European Union to publish lists of trusted service providers — entities
+authorized to issue electronic signatures, seals, timestamps, and other
+trust services under the eIDAS regulation. Each EU member state publishes a
+national TSL, and the European Commission publishes a List of the Lists (LoTL)
+that references each national TSL, forming a well-defined, hierarchical trust
+federation.
+        </p>
+
+        <p>
+ETSI Trust Service Lists share several conceptual goals with this
+specification: both describe entities that are recognized to perform specific
+actions, associate those entities with identifying metadata, and are intended
+to be consumed by relying parties during validation. However, this
+specification differs from ETSI Trust Service Lists in several key ways:
+        </p>
+
+        <ul>
+          <li>
+<strong>Format:</strong> ETSI Trust Service Lists are expressed as signed XML
+documents. This specification uses JSON-LD and the Verifiable Credentials Data
+Model, enabling integration with the broader decentralized identity ecosystem.
+          </li>
+          <li>
+<strong>Governance:</strong> ETSI Trust Service Lists are governed by a
+centralized, hierarchical structure rooted in EU member state authorities.
+This specification supports both centralized and decentralized governance
+models, allowing any entity to act as a recognizing authority within its
+own ecosystem.
+          </li>
+          <li>
+<strong>Scope:</strong> ETSI Trust Service Lists are scoped to electronic
+trust services regulated under eIDAS. This specification is domain-agnostic
+and can express recognition across any sector, including education,
+healthcare, and financial services.
+          </li>
+          <li>
+<strong>Holder-centric sharing:</strong> ETSI Trust Service Lists are
+published at well-known URLs and fetched by relying parties. This
+specification additionally supports "certificate stapling", where a holder
+presents a recognition credential directly to a verifier, reducing the need
+for verifiers to contact a central registry during each interaction.
+          </li>
+        </ul>
+      </section>
+
+      <section class="informative">
+        <h3>X.509 Certificate Authority Lists</h3>
+
+        <p>
+X.509 [[RFC5280]] is a standard for public key infrastructure (PKI) that
+defines the format for certificates and certificate chains. Certificate
+Authorities (CAs) are entities trusted to issue X.509 certificates that bind
+a public key to an identity. Trust in a CA is typically established through
+inclusion in a browser or operating system trust store — a curated list of
+root CAs — or through a certificate chain that traces back to such a root.
+        </p>
+
+        <p>
+X.509 CA infrastructure and this specification both address the problem of
+establishing which entities are trusted to perform specific actions within
+a given context. However, this specification differs from X.509 CA lists in
+several key ways:
+        </p>
+
+        <ul>
+          <li>
+<strong>Data model:</strong> X.509 certificates encode identity and public
+key binding in a binary ASN.1 format with a fixed schema. This specification
+uses a flexible, extensible JSON-LD data model that can express arbitrary
+metadata about recognized entities and the actions they are authorized to
+perform.
+          </li>
+          <li>
+<strong>Trust hierarchy:</strong> X.509 PKI relies on a strictly hierarchical
+chain of trust rooted in a small number of globally trusted root CAs. This
+specification supports a web-of-trust model where multiple, overlapping, and
+competing recognition registries can coexist, and ecosystem participants can
+choose which recognizing authorities they trust.
+          </li>
+          <li>
+<strong>Action semantics:</strong> X.509 certificates express key usage and
+extended key usage flags to constrain what a certificate may be used for, but
+these are limited to a fixed set of cryptographic operations. This
+specification expresses recognition for arbitrary, domain-specific actions
+such as issuing a particular type of credential, enabling richer and more
+context-specific recognition claims.
+          </li>
+          <li>
+<strong>Decentralized issuance:</strong> Adding a new CA to existing trust
+stores requires acceptance by browser vendors or OS maintainers, a
+centralized and often slow process. This specification allows any entity to
+issue a `VerifiableRecognitionCredential` and share it within its ecosystem
+without requiring approval from a central gatekeeper.
+          </li>
+        </ul>
+      </section>
+
+      <section class="informative">
+        <h3>ISO/IEC 18013-5 mDL VICAL</h3>
+
+        <p>
+ISO/IEC 18013-5 defines the mobile Driving License (mDL), a standard for
+expressing driver's licenses as mobile documents. As part of that ecosystem,
+the standard defines a Verified Issuer Certificate Authority List (VICAL),
+which is a signed data structure containing a list of certificate authority
+certificates for entities that are recognized to issue mDLs. A relying party
+uses the VICAL to determine whether the issuer of a presented mDL is trusted
+within its jurisdiction.
+        </p>
+
+        <p>
+The VICAL concept and this specification share the goal of enabling relying
+parties to determine whether a credential issuer is recognized within a
+particular ecosystem. However, this specification differs from the mDL VICAL
+in several key ways:
+        </p>
+
+        <ul>
+          <li>
+<strong>Format:</strong> The VICAL is a CBOR-encoded, COSE-signed data
+structure tightly coupled to the mDL ecosystem. This specification uses
+JSON-LD and the Verifiable Credentials Data Model, making it suitable for
+a broader range of credential types and deployment environments.
+          </li>
+          <li>
+<strong>Scope:</strong> The VICAL is specific to the mDL use case and the
+ISO/IEC 18013-5 trust model. This specification is credential-type-agnostic
+and can express recognition for any type of verifiable credential and any
+kind of action, not just credential issuance for driving licenses.
+          </li>
+          <li>
+<strong>Action expressiveness:</strong> The VICAL records which CAs are
+trusted to issue mDL certificates but does not have a general mechanism for
+expressing the scope or type of actions an issuer is recognized to perform.
+This specification's `RecognizedAction` structure explicitly captures what
+action a recognized entity is authorized to perform and against which
+credential schemas, enabling more fine-grained authorization.
+          </li>
+          <li>
+<strong>Decentralization:</strong> The VICAL is managed by a designated VICAL
+provider within each mDL ecosystem and distributed through centralized
+channels. This specification allows any entity to publish a recognition
+credential without relying on a designated central provider, supporting
+more open and composable trust ecosystems.
+          </li>
+        </ul>
+      </section>
+
+    </section>
+
+    <section class="appendix informative">
       <h2>Acknowledgements</h2>
 
       <p>
