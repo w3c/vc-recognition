@@ -836,6 +836,72 @@ provided in the
 Privacy Considerations section of the Verifiable Credentials specification</a>
 before reading this section.
       </p>
+
+      <section>
+        <h3>Surveillance of Individuals as Recognized Entities</h3>
+        <p class="issue">
+A `VerifiableRecognitionCredential` publicly lists named organizations and
+people with their identifiers, legal names, URLs, and images. Aggregating
+these across multiple lists enables profiling and surveillance of
+recognized entities. This section should discuss the risks of publishing
+richly-described entity information, especially for individuals, and guidance
+for issuers on minimizing disclosure. For example, publishing a list of
+recognized entities in a private group can escape that group if any group
+member decides to publish the information outside of the private group.
+        </p>
+      </section>
+
+      <section>
+        <h3>Issuer Recognition Credential as a Tracking Vector</h3>
+        <p class="issue">
+When a holder presents a recognition credential via certificate stapling, the
+verifier learns which recognizing authority the holder chose to rely upon,
+revealing information about the holder's trust network and potentially their
+ecosystem affiliation. This section should discuss how the act of presenting
+a recognition credential can itself expose information about the holder and
+how to mitigate this risk. This isn't really any different from understanding
+who the issuer of a VC is -- mitigations might include trusted 3rd party
+witnesses.
+        </p>
+      </section>
+
+      <section>
+        <h3>Correlation via Recognition Metadata</h3>
+        <p class="issue">
+The `recognizedBy`, `outputValidation` schema URLs within a
+`RecognizedAction` are highly specific and potentially unique identifiers. A
+holder presenting a recognition credential that references a narrowly-used
+schema or recognizing authority can be strongly correlated across verifiers.
+This section should discuss how recognition metadata can serve as a
+correlation vector and guidance for reducing that risk.
+        </p>
+
+        <p class="issue">
+Verifiers who fetch updated recognition credentials from a remote URL to
+check freshness or revocation signal to the recognition credential issuer
+that a particular class of credential is in active use, enabling recognizer-based
+tracking of verifier behavior. This is especially true for recognition
+VCs that only list a single entity. This section should discuss the privacy
+implications of remote fetching and techniques such as Oblivious HTTP that can
+mitigate tracking.
+        </p>
+      </section>
+
+      <section>
+        <h3>Publication of Sensitive Ecosystem Membership</h3>
+        <p class="issue">
+A `VerifiableRecognitionCredential` can reveal the membership structure of a
+private or sensitive ecosystem, such as healthcare credential issuers or
+financial service providers. Publishing or widely sharing such credentials
+exposes which entities participate in that ecosystem, which may be
+commercially sensitive or create targeting risks. This section should discuss
+when and how to limit the distribution of recognition credentials that
+describe sensitive ecosystems, possibly suggesting that it is not possible
+to limit distribution of recognition credentials and thus creating them for
+sensitive ecosystems might be an anti-pattern.
+        </p>
+      </section>
+
     </section>
 
     <section>
@@ -890,6 +956,69 @@ Instead, a [=verifier=] needs to vet the issuer of the recognition credential
 as well as the [=recognized action=] independently of receiving the
 `VerifiableRecognitionCredential` and can only depend on information from the
 credential once trust has been established on the issuing entity.
+        </p>
+      </section>
+
+      <section>
+        <h3>Issuer Impersonation</h3>
+        <p class="issue">
+A malicious actor could create a `VerifiableRecognitionCredential` that mimics a
+well-known recognizing authority by using a similar `issuer` identifier or name.
+Verifiers who manually add VRCs to their software, that do not independently
+validate the issuer's identifier against a known root of trust could be deceived
+into accepting fraudulent recognition claims. This section should discuss how to
+detect and prevent issuer impersonation and the importance of verifying issuer
+identifiers through authoritative out-of-band means.
+        </p>
+      </section>
+
+      <section>
+        <h3>Selecting Appropriate Validity Periods</h3>
+        <p class="issue">
+Recognition credentials with excessively long `validUntil` periods may remain
+in circulation long after a recognized entity has been suspended, revoked, or
+compromised. Conversely, overly short validity periods create operational
+burden. This section should discuss appropriate validity period selection and
+the importance of pairing validity periods with robust revocation mechanisms.
+        </p>
+      </section>
+
+      <section>
+        <h3>External Resource Tampering</h3>
+        <p class="issue">
+The `outputValidation` property references external schema files via URL. If
+those URLs are not protected by `digestMultibase` integrity checks, an attacker
+who compromises the schema host can alter validation rules without invalidating
+the recognition credential, causing verifiers to accept credentials that no
+longer conform to the intended schema. This section should discuss the
+importance of using content integrity protection for all externally referenced
+resources.
+        </p>
+      </section>
+
+      <section>
+        <h3>Verifying Recognition Chains</h3>
+        <p class="issue">
+The `recognizedIn` property allows recognition credentials to chain to other
+registries such as ETSI Trust Service Lists, X.509 certificate authority lists,
+or other `VerifiableRecognitionCredential`s. A compromised or malicious entry
+in a lower-level registry could be transitively trusted if verifiers do not
+enforce depth limits or validate each link in the chain independently. This
+section should discuss safe practices for traversing chained recognition
+structures and the risks of unbounded transitive trust.
+        </p>
+      </section>
+
+      <section>
+        <h3>Abuse of Recognized Actions</h3>
+        <p class="issue">
+The `action` property is a free-form string (e.g., `issue`, `verify`). Without
+strict governance of allowable action values within an ecosystem, recognized
+entities may present credentials claiming broad or undefined actions that
+verifiers interpret more permissively than intended, leading to unauthorized use
+beyond the issuer's intent. This section should discuss the importance of
+ecosystem-level governance of action vocabularies and how verifiers should
+handle unrecognized action values.
         </p>
       </section>
 
