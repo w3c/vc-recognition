@@ -1093,18 +1093,18 @@ root CAs — or through a certificate chain that traces back to such a root.
 
         <p>
 X.509 CA infrastructure and this specification both address the problem of
-establishing which entities are trusted to perform specific actions within
-a given context. However, this specification differs from X.509 CA lists in
-several key ways:
+establishing whether a given entity is trusted to perform a specific action
+within a given context. However, this specification differs from X.509 CA
+lists in several key ways:
         </p>
 
         <ul>
           <li>
 <strong>Data model:</strong> X.509 certificates encode identity and public
-key binding in a binary ASN.1 format with a fixed schema. This specification
-uses a flexible, extensible JSON-LD data model that can express arbitrary
-metadata about recognized entities and the actions they are authorized to
-perform.
+key association in a binary ASN.1 format with a fixed schema. This
+specification uses a flexible, extensible JSON-LD data model that can
+express arbitrary metadata about recognized entities and the actions they
+are authorized to perform.
           </li>
           <li>
 <strong>Trust hierarchy:</strong> X.509 PKI relies on a strictly hierarchical
@@ -1119,13 +1119,13 @@ extended key usage flags to constrain what a certificate may be used for, but
 these are limited to a fixed set of cryptographic operations. This
 specification expresses recognition for arbitrary, domain-specific actions
 such as issuing a particular type of credential, enabling richer and more
-context-specific recognition claims.
+context-specific claims of recognition.
           </li>
           <li>
 <strong>Decentralized issuance:</strong> Adding a new CA to existing trust
-stores requires acceptance by browser vendors or OS maintainers, a
-centralized and often slow process. This specification allows any entity to
-issue a `VerifiableRecognitionCredential` and share it within its ecosystem
+stores requires acceptance by browser vendors and/or OS maintainers, which
+is a centralized and often slow process. This specification allows any entity
+to issue a `VerifiableRecognitionCredential` and share it within its ecosystem
 without requiring approval from a central gatekeeper.
           </li>
         </ul>
@@ -1136,12 +1136,12 @@ without requiring approval from a central gatekeeper.
 
         <p>
 ISO/IEC 18013-5 defines the mobile Driving License (mDL), a standard for
-expressing driver's licenses as mobile documents. As part of that ecosystem,
-the standard defines a Verified Issuer Certificate Authority List (VICAL),
-which is a signed data structure containing a list of certificate authority
-certificates for entities that are recognized to issue mDLs. A relying party
-uses the VICAL to determine whether the issuer of a presented mDL is trusted
-within its jurisdiction.
+expressing driver's licenses as mobile documents (mDocs). As part of that
+ecosystem, the standard defines a Verified Issuer Certificate Authority List
+(VICAL), which is a signed data structure containing a list of certificate
+authority certificates for entities that are recognized to issue mDLs. A
+relying party uses the VICAL to determine whether the issuer of a presented
+mDL is trusted within its jurisdiction.
         </p>
 
         <p>
@@ -1154,22 +1154,22 @@ in several key ways:
         <ul>
           <li>
 <strong>Format:</strong> The VICAL is a CBOR-encoded, COSE-signed data
-structure tightly coupled to the mDL ecosystem. This specification uses
-JSON-LD and the Verifiable Credentials Data Model, making it suitable for
-a broader range of credential types and deployment environments.
+structure which is tightly coupled to the mDL ecosystem. This specification
+uses JSON-LD and the Verifiable Credentials Data Model, making it suitable
+for a broader range of credential types and deployment environments.
           </li>
           <li>
 <strong>Scope:</strong> The VICAL is specific to the mDL use case and the
-ISO/IEC 18013-5 trust model. This specification is credential-type-agnostic
-and can express recognition for any type of verifiable credential and any
-kind of action, not just credential issuance for driving licenses.
+ISO/IEC 18013-5 trust model. This specification can use any type of credential
+to express recognition of any type of verifiable credential and any kind of
+action; it is not limited to issuing credentials for driving licenses.
           </li>
           <li>
-<strong>Action expressiveness:</strong> The VICAL records which CAs are
-trusted to issue mDL certificates but does not have a general mechanism for
-expressing the scope or type of actions an issuer is recognized to perform.
-This specification's `RecognizedAction` structure explicitly captures what
-action a recognized entity is authorized to perform and against which
+<strong>Action expressiveness:</strong> The VICAL records CAs which are
+trusted to issue mDL certificates, but does not have a general mechanism by
+which to express the scope or type of actions a CA is recognized to perform.
+This specification's `RecognizedAction` structure explicitly captures the
+actions a recognized entity is authorized to perform and against which
 credential schemas, enabling more fine-grained authorization.
           </li>
           <li>
