@@ -15,10 +15,11 @@
     <script type="text/javascript" class="remove">
       var respecConfig = {
         // specification status (e.g., WD, LCWD, NOTE, etc.). If in doubt use ED.
-        specStatus: "CG-FINAL",
+        specStatus: "CG-DRAFT",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
         shortName: "vc-recognition",
+        subtitle: "Recognizing entities and the actions that they perform",
         group: "credentials",
 
         // if you wish the publication date to be other than today, set this
@@ -872,7 +873,7 @@ reason to trust for the given recognition domain, and that the credential has
 not expired or been revoked. Implementers cannot rely solely on the fact
 that a peer has already accepted a credential as evidence of its validity.
 Instead, a [=verifier=] needs to vet the issuer of the recognition credential
-as well as the recognized action independently of receiving the
+as well as the [=recognized action=] independently of receiving the
 `VerifiableRecognitionCredential` and can only depend on information from the
 credential once trust has been established on the issuing entity.
         </p>
