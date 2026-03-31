@@ -819,7 +819,9 @@ Readers are urged to familiarize themselves with the general privacy advice
 provided in the
 <a data-cite="VC-DATA-MODEL#privacy-considerations">
 Privacy Considerations section of the Verifiable Credentials specification</a>
-before reading this section.
+before reading this section. Implementers are expected to apply the
+general warnings provided in that specification to each specific features
+provided by this specification.
       </p>
 
       <section>
@@ -833,47 +835,21 @@ richly-described entity information, especially for individuals, and guidance
 for issuers on minimizing disclosure. For example, a list of recognized
 entities that is published to a private group can escape that group if any group
 member decides to publish the information outside of the private group.
+Suggest that selective disclosure does not provide much protection here because
+it requires honest actors.
         </p>
       </section>
 
       <section>
-        <h3>Issuer Recognition Credential as a Tracking Vector</h3>
+        <h3>Holder Provided Recognition Credentials</h3>
         <p class="issue">
-When a holder presents a recognition credential via certificate stapling, the
-verifier learns which recognizing entity the holder chose to rely upon,
-revealing information about the holder's trust network and potentially their
-ecosystem affiliation. This section should discuss how the act of presenting
-a recognition credential can itself expose information about the holder and
-how to mitigate this risk. This isn't really any different from understanding
-who the issuer of a VC is -- mitigations might include trusted 3rd party
-witnesses.
+Holder provided recognition credentials are more privacy preserving than having
+the verifier reach out to the issuer to retrieve the recognition credential.
         </p>
       </section>
 
       <section>
-        <h3>Correlation via Recognition Metadata</h3>
-        <p class="issue">
-The `recognizedBy`, `outputValidation` schema URLs within a
-`RecognizedAction` are highly specific and potentially unique identifiers. A
-holder presenting a recognition credential that references a narrowly-used
-schema or recognizing authority can be strongly correlated across verifiers.
-This section should discuss how recognition metadata can serve as a
-correlation vector and guidance for reducing that risk.
-        </p>
-
-        <p class="issue">
-Verifiers who fetch updated recognition credentials from a remote URL to
-check freshness or revocation signal to the recognition credential issuer
-that a particular class of credential is in active use, enabling recognizer-based
-tracking of verifier behavior. This is especially true for recognition
-VCs that only list a single entity. This section should discuss the privacy
-implications of remote fetching and techniques such as Oblivious HTTP that can
-mitigate tracking.
-        </p>
-      </section>
-
-      <section>
-        <h3>Publication of Sensitive Ecosystem Membership</h3>
+        <h3>Harms by Association</h3>
         <p class="issue">
 A `VerifiableRecognitionCredential` can reveal the membership structure of a
 private or sensitive ecosystem, such as healthcare credential issuers or
@@ -883,7 +859,9 @@ commercially sensitive or create targeting risks. This section should discuss
 when and how to limit the distribution of recognition credentials that
 describe sensitive ecosystems, possibly suggesting that it is not possible
 to limit distribution of recognition credentials and thus creating them for
-sensitive ecosystems might be an anti-pattern.
+sensitive ecosystems might be an anti-pattern. In general, if you build
+certain lists with certain memberships, it might have negative effects on
+individuals (harm by association) -- unintended or not.
         </p>
       </section>
 
@@ -953,18 +931,33 @@ Verifiers who manually add VRCs to their software, that do not independently
 validate the issuer's identifier against a known root of trust could be deceived
 into accepting fraudulent recognition claims. This section should discuss how to
 detect and prevent issuer impersonation and the importance of verifying issuer
-identifiers through authoritative out-of-band means.
+identifiers through authoritative out-of-band means.<br/><br/>
+
+Note that appropriate bindings to protocols and user interactions (such as an
+individual receiving a request from origin). It would be good if a wallet
+communicates: "I have a recognition credential for this origin/issuer from
+someone you trust" (if there is a check that made that binds request to origin
+-- TLS used, for example) and that's associated with issuer in VRC. It would be
+good for this section to talk about how protocols can bind this sort of
+information together to help individuals not fall for scams.
         </p>
       </section>
 
       <section>
         <h3>Selecting Appropriate Validity Periods</h3>
         <p class="issue">
-Recognition credentials with excessively long `validUntil` periods may remain
-in circulation long after a recognized entity has been suspended, revoked, or
+Recognition credentials with excessively long `validUntil` periods may remain in
+circulation long after a recognized entity has been suspended, revoked, or
 compromised. Conversely, overly short validity periods create operational
 burden. This section should discuss appropriate validity period selection and
 the importance of pairing validity periods with robust revocation mechanisms.
+The section should speak to Speak to organization/individual end of life as
+well. How long a period should be is dependent on how large and how diverse the
+list is -- larger the list, shorter the timeline (24-48 hours?), smaller the
+list, longer the timeline (weeks to months). Want to be able to add entities on
+reasonable timeframes. Ecosystems might desire list aggregators -- accreditation
+bodies might have longer periods. The section should explain the  utility for
+having a longer period -- why go longer than 24-48 hours?
         </p>
       </section>
 
