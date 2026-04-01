@@ -1,7 +1,7 @@
 {
-  "group": 53154,
+  "group": "cg/credentials",
   "contacts": [
-    "yourGHusername"
+    "pchampin"
   ],
   "policy": "open",
   "repo-type": "note"
