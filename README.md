@@ -1,5 +1,4 @@
-
-# Verifiable Issuers and Verifiers
+# VCs for Entity Recognition
 
 This specification describes a data model with which one or more recognized
 entities, such as one or more persons and/or organizations, can be described as
@@ -12,9 +11,9 @@ specification is designed to interoperate with existing "trust infrastructures",
 such as X.509 certificate authority lists and ETSI Trust Service Lists, while
 enabling new decentralized ecosystems to be built using verifiable credentials.
 
-You can view the live version of this specification here:
-
-https://w3c-ccg.github.io/vc-recognition/
+Live versions of...
+* [VCs for Entity Recognition](https://w3c.github.io/vc-recognition/) specification
+* [Use Cases](https://w3c.github.io/vc-recognition/use-cases)
 
 
 While we prefer the creation of issues and Pull Requests in the GitHub
@@ -22,8 +21,8 @@ repository, discussions also occur on the
 [public-credentials](http://lists.w3.org/Archives/Public/public-credentials/) mailing list.
 
 ### Other Relevant VC Working Group Repositories
-* [Use Cases](https://github.com/w3c/vc-use-cases)
-* [Data Model](https://github.com/w3c/vc-data-model)
+* [Verifiable Credential Use Cases](https://github.com/w3c/vc-use-cases)
+* [VC Data Model](https://github.com/w3c/vc-data-model)
 
 ### Discussion Forums
 * [W3C Credentials Community Group Mailing List (Incubation)](https://lists.w3.org/Archives/Public/public-credentials/)
