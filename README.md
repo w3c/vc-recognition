@@ -1,4 +1,3 @@
-
 # Verifiable Credentials for Recognized Entities
 
 This specification describes a data model with which one or more recognized
@@ -12,18 +11,18 @@ specification is designed to interoperate with existing "trust infrastructures",
 such as X.509 certificate authority lists and ETSI Trust Service Lists, while
 enabling new decentralized ecosystems to be built using verifiable credentials.
 
-You can view the live version of this specification here:
+You can view the live versions of the documents at the links below:
 
-https://w3c.github.io/vc-recognized-entities/
-
+* [Specification](https://w3c.github.io/vc-recognized-entities/)
+* [Use Cases](https://w3c.github.io/vc-recognized-entities/use-cases)
 
 While we prefer the creation of issues and Pull Requests in the GitHub
 repository, discussions also occur on the
 [public-credentials](http://lists.w3.org/Archives/Public/public-credentials/) mailing list.
 
 ### Other Relevant VC Working Group Repositories
-* [Use Cases](https://github.com/w3c/vc-use-cases)
-* [Data Model](https://github.com/w3c/vc-data-model)
+* [Verifiable Credential Use Cases](https://github.com/w3c/vc-use-cases)
+* [VC Data Model](https://github.com/w3c/vc-data-model)
 
 ### Discussion Forums
 * [W3C Credentials Community Group Mailing List (Incubation)](https://lists.w3.org/Archives/Public/public-credentials/)
