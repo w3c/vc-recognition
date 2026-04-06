@@ -1,5 +1,5 @@
 
-# Verifiable Issuers and Verifiers
+# Verifiable Credentials for Recognized Entities
 
 This specification describes a data model with which one or more recognized
 entities, such as one or more persons and/or organizations, can be described as
