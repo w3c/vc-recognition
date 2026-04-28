@@ -820,7 +820,7 @@ provided in the
 <a data-cite="VC-DATA-MODEL#privacy-considerations">
 Privacy Considerations section of the Verifiable Credentials specification</a>
 before reading this section. Implementers are expected to apply the
-general warnings provided in that specification to each specific features
+general warnings provided in that specification to each specific feature
 provided by this specification.
       </p>
 
@@ -841,9 +841,9 @@ it requires honest actors.
       </section>
 
       <section>
-        <h3>Holder Provided Recognition Credentials</h3>
+        <h3>Holder-Provided Recognition Credentials</h3>
         <p class="issue">
-Holder provided recognition credentials are more privacy preserving than having
+Having holders provide recognition credentials preserves privacy better than having
 the verifier reach out to the issuer to retrieve the recognition credential.
         </p>
       </section>
@@ -854,7 +854,7 @@ the verifier reach out to the issuer to retrieve the recognition credential.
 A `VerifiableRecognitionCredential` can reveal the membership structure of a
 private or sensitive ecosystem, such as healthcare credential issuers or
 financial service providers. Publishing or widely sharing such credentials
-exposes which entities participate in that ecosystem, which may be
+can expose which entities participate in that ecosystem, which can be
 commercially sensitive or create targeting risks. This section should discuss
 when and how to limit the distribution of recognition credentials that
 describe sensitive ecosystems, possibly suggesting that it is not possible
@@ -928,7 +928,7 @@ credential once trust has been established on the issuing entity.
 A malicious actor could create a `VerifiableRecognitionCredential` that mimics a
 well-known recognizing authority by using a similar `issuer` identifier or name.
 Verifiers who manually add VRCs to their software, that do not independently
-validate the issuer's identifier against a known root of trust could be deceived
+validate the issuer's identifier against a known root of trust, could be deceived
 into accepting fraudulent recognition claims. This section should discuss how to
 detect and prevent issuer impersonation and the importance of verifying issuer
 identifiers through authoritative out-of-band means.<br/><br/>
@@ -936,7 +936,7 @@ identifiers through authoritative out-of-band means.<br/><br/>
 Note that appropriate bindings to protocols and user interactions (such as an
 individual receiving a request from origin). It would be good if a wallet
 communicates: "I have a recognition credential for this origin/issuer from
-someone you trust" (if there is a check that made that binds request to origin
+someone you trust" (if there is a check made that binds request to origin
 -- TLS used, for example) and that's associated with issuer in VRC. It would be
 good for this section to talk about how protocols can bind this sort of
 information together to help individuals not fall for scams.
@@ -949,15 +949,15 @@ information together to help individuals not fall for scams.
 Recognition credentials with excessively long `validUntil` periods may remain in
 circulation long after a recognized entity has been suspended, revoked, or
 compromised. Conversely, overly short validity periods create operational
-burden. This section should discuss appropriate validity period selection and
+burden. This section should discuss appropriate selection of validity periods and
 the importance of pairing validity periods with robust revocation mechanisms.
-The section should speak to Speak to organization/individual end of life as
-well. How long a period should be is dependent on how large and how diverse the
-list is -- larger the list, shorter the timeline (24-48 hours?), smaller the
-list, longer the timeline (weeks to months). Want to be able to add entities on
-reasonable timeframes. Ecosystems might desire list aggregators -- accreditation
-bodies might have longer periods. The section should explain the  utility for
-having a longer period -- why go longer than 24-48 hours?
+The section should speak to organization/individual end of life as well. How long
+a period should be is dependent on list size and diversity -- the larger the list,
+the shorter the timeline (24-48 hours?); the smaller the list, the longer the
+timeline (weeks to months). Want to be able to add entities on reasonable
+timeframes. Ecosystems might desire list aggregators -- accreditation bodies might
+have longer periods. The section should explain the justification for having a
+longer period -- why go longer than 24-48 hours?
         </p>
       </section>
 
@@ -965,10 +965,10 @@ having a longer period -- why go longer than 24-48 hours?
         <h3>External Resource Tampering</h3>
         <p class="issue">
 The `outputValidation` property references external schema files via URL. If
-those URLs are not protected by `digestMultibase` integrity checks, an attacker
-who compromises the schema host can alter validation rules without invalidating
-the recognition credential, causing verifiers to accept credentials that no
-longer conform to the intended schema. This section should discuss the
+those URLs are not protected by `digestMultibase` or other integrity checks, an
+attacker who compromises the schema host can alter validation rules without
+invalidating the recognition credential, causing verifiers to accept credentials
+that no longer conform to the intended schema. This section should discuss the
 importance of using content integrity protection for all externally referenced
 resources.
         </p>
