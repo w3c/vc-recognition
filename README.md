@@ -14,7 +14,7 @@ enabling new decentralized ecosystems to be built using verifiable credentials.
 
 You can view the live version of this specification here:
 
-https://w3c-ccg.github.io/vc-recognition/
+https://w3c.github.io/vc-recognized-entities/
 
 
 While we prefer the creation of issues and Pull Requests in the GitHub
