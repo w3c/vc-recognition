@@ -256,7 +256,7 @@ entity can use to publish or share recognition information as a [=verifiable
 credential=]. Rather than mandating a single central registry, the model allows
 any entity — a government body, an industry consortium, a standards
 organization, or even a single individual — to issue a
-`RecognizedEntitiesCredential` asserting that they know of one or more
+`RecognizedEntityCredential` asserting that they know of one or more
 entities that are recognized to perform specific actions. This design enables a
 web of overlapping, competing, and complementary "trust registries" to coexist,
 allowing ecosystem participants to choose the entities they trust and to reason
@@ -276,7 +276,7 @@ The remainder of this document is organized into the following sections:
       <ul>
         <li>
 Section [[[#data-model]]] defines the core data model, including the
-`RecognizedEntity`, `RecognizedAction`, and `RecognizedEntitiesCredential`
+`RecognizedEntity`, `RecognizedAction`, and `RecognizedEntityCredential`
 types along with their properties and worked examples.
         </li>
         <li>
@@ -343,8 +343,8 @@ details of the list operator description.
 
         <p>
 The properties in this section can be added to objects found in a
-`RecognizedEntitiesCredential` as defined in Section
-[[[#recognizedentitiescredential]]]. Each general property listed in
+`RecognizedEntityCredential` as defined in Section
+[[[#recognizedentitycredential]]]. Each general property listed in
 this section is OPTIONAL; none of the values are required to be provided by
 an [=issuer=].
         </p>
@@ -441,7 +441,7 @@ of the [[[VC-DATA-MODEL]]] specification.
 
         <p>
 A <dfn>recognized entity</dfn> is any entity that is recognized by an [=issuer=]
-of a `RecognizedEntitiesCredential` to perform a specific action.
+of a `RecognizedEntityCredential` to perform a specific action.
         </p>
 
         <table class="simple">
@@ -488,7 +488,7 @@ known to perform. The `id` value of the object MUST be a
 [=URL=]. The `type` value of the object MUST conform to the
 <a data-cite="VC-DATA-MODEL#types">type value space </a> defined in
 the [[[VC-DATA-MODEL]]] specification and SHOULD be `EtsiTrustServiceList`,
-`x509CertificateAuthorityList`, or `RecognizedEntitiesCredential`.
+`x509CertificateAuthorityList`, or `RecognizedEntityCredential`.
               </td>
             </tr>
           </tbody>
@@ -503,7 +503,7 @@ addition to the properties above.
 A `recognizedIn` with a `type` property of `EtsiTrustServiceList` MUST conform
 to the [[[ETSI-TRUST-LISTS]]] specification. A list with `type` property of
 `x509CertificateAuthorityList` MUST conform to the [[[RFC5280]]] specification.
-A list with a `type` property of `RecognizedEntitiesCredential` MUST conform
+A list with a `type` property of `RecognizedEntityCredential` MUST conform
 to this specification.
         </p>
 
@@ -565,10 +565,10 @@ property.
     </section>
 
     <section>
-        <h3>RecognizedEntitiesCredential</h3>
+        <h3>RecognizedEntityCredential</h3>
 
         <p>
-When a <dfn>recognized entities credential</dfn>
+When a <dfn>recognized entity credential</dfn>
 is published, it MUST be a conforming [=verifiable credential=], as defined in
 [[[VC-DATA-MODEL-2.0]]], that expresses the data model specified in the section
 that follows. It describes the format of a [=verifiable credential=] that
@@ -580,10 +580,10 @@ A recognized entity is expressed inside a [=verifiable credential=],
 enabling a [=holder=] to provide it directly to a [=verifier=]. This
 mechanism, sometimes called "certificate stapling", increases privacy for the
 [=holder=] by ensuring that the [=verifier=] does not need to contact the
-[=issuer=] to retrieve the recognized entities credential. Still, a [=verifier=] might
-choose to ignore the [=holder=]-provided [=recognized entities credential=], even when
+[=issuer=] to retrieve the recognized entity credential. Still, a [=verifier=] might
+choose to ignore the [=holder=]-provided [=recognized entity credential=], even when
 its authenticity is verifiable, if, for instance, it desires a more recent
-version of the [=recognized entities credential=].
+version of the [=recognized entity credential=].
         </p>
 
         <table class="simple">
@@ -605,7 +605,7 @@ express an `id` property to make its retrieval easier for other systems.
               <td>type</td>
               <td>
 A [=verifiable credential=] that contains a set of recognized entities MUST
-express a `type` property that includes the `RecognizedEntitiesCredential`
+express a `type` property that includes the `RecognizedEntityCredential`
 value.
               </td>
             </tr>
@@ -648,7 +648,7 @@ Section [[[#recognizedentity]]].
       </table>
 
       <p>
-The following examples demonstrate how recognized entities credentials can be
+The following examples demonstrate how recognized entity credentials can be
 employed in a variety of use cases. The first example below is used to
 publish information about a set of known universities in a particular nation.
       </p>
@@ -661,7 +661,7 @@ publish information about a set of known universities in a particular nation.
   ],
   "type": [
     "VerifiableCredential",
-    "RecognizedEntitiesCredential"
+    "RecognizedEntityCredential"
   ],
   "issuer": {
     "id": "did:web:learning-commission.example",
@@ -710,7 +710,7 @@ for a particular type of [=verifiable credential=].
   ],
   "type": [
     "VerifiableCredential",
-    "RecognizedEntitiesCredential"
+    "RecognizedEntityCredential"
   ],
   "issuer": {
     "id": "did:web:learning-commission.example",
@@ -779,7 +779,7 @@ publishes an European Union ETSI Trust Services list [[ETSI-TRUST-LISTS]].
   ],
   "type": [
     "VerifiableCredential",
-    "RecognizedEntitiesCredential"
+    "RecognizedEntityCredential"
   ],
   "issuer": "did:web:ec.europa.example",
   "validFrom": "2025-01-01T00:00:00Z",
@@ -832,7 +832,7 @@ provided by this specification.
       <section>
         <h3>Surveillance of Individuals as Recognized Entities</h3>
         <p class="issue">
-A `RecognizedEntitiesCredential` publicly lists named organizations and
+A `RecognizedEntityCredential` publicly lists named organizations and
 people with their identifiers, legal names, URLs, and images. Aggregating
 these across multiple lists enables profiling and surveillance of
 recognized entities. This section should discuss the risks of publishing
@@ -848,22 +848,22 @@ it requires honest actors.
       <section>
         <h3>Holder-Provided Recognition Credentials</h3>
         <p class="issue">
-Having holders provide recognized entities credentials preserves privacy better than having
-the verifier reach out to the issuer to retrieve the recognized entities credential.
+Having holders provide recognized entity credentials preserves privacy better than having
+the verifier reach out to the issuer to retrieve the recognized entity credential.
         </p>
       </section>
 
       <section>
         <h3>Harms by Association</h3>
         <p class="issue">
-A `RecognizedEntitiesCredential` can reveal the membership structure of a
+A `RecognizedEntityCredential` can reveal the membership structure of a
 private or sensitive ecosystem, such as healthcare credential issuers or
 financial service providers. Publishing or widely sharing such credentials
 can expose which entities participate in that ecosystem, which can be
 commercially sensitive or create targeting risks. This section should discuss
-when and how to limit the distribution of recognized entities credentials that
+when and how to limit the distribution of recognized entity credentials that
 describe sensitive ecosystems, possibly suggesting that it is not possible
-to limit distribution of recognized entities credentials and thus creating them for
+to limit distribution of recognized entity credentials and thus creating them for
 sensitive ecosystems might be an anti-pattern. In general, if you build
 certain lists with certain memberships, it might have negative effects on
 individuals (harm by association) -- unintended or not.
@@ -900,9 +900,9 @@ critical systems using the technology outlined in this specification.
       <section>
         <h3>Validate Before Sharing</h3>
         <p>
-When a [=holder=] receives a `RecognizedEntitiesCredential` and shares it
+When a [=holder=] receives a `RecognizedEntityCredential` and shares it
 with others, there is a risk that the credential has not been properly vetted.
-A malicious or negligent actor could craft a `RecognizedEntitiesCredential`
+A malicious or negligent actor could craft a `RecognizedEntityCredential`
 that lists fraudulent or compromised entities as recognized issuers or
 verifiers, and propagate it peer-to-peer across an ecosystem. Recipients who
 accept and act upon such a credential without independent verification might
@@ -914,15 +914,15 @@ corrupt the trust assumptions of many parties in an ecosystem.
         </p>
         <p>
 To mitigate these dangers, deployments are expected to independently verify the
-cryptographic integrity and provenance of any `RecognizedEntitiesCredential`
+cryptographic integrity and provenance of any `RecognizedEntityCredential`
 before acting upon it or sharing it further. This includes confirming that the
 [=issuer=] of the credential is a party the implementer has an established
 reason to trust for the given recognition domain, and that the credential has
 not expired or been revoked. Implementers cannot rely solely on the fact
 that a peer has already accepted a credential as evidence of its validity.
-Instead, a [=verifier=] needs to vet the issuer of the recognized entities credential
+Instead, a [=verifier=] needs to vet the issuer of the recognized entity credential
 as well as the [=recognized action=] independently of receiving the
-`RecognizedEntitiesCredential` and can only depend on information from the
+`RecognizedEntityCredential` and can only depend on information from the
 credential once trust has been established on the issuing entity.
         </p>
       </section>
@@ -930,7 +930,7 @@ credential once trust has been established on the issuing entity.
       <section>
         <h3>Issuer Impersonation</h3>
         <p class="issue">
-A malicious actor could create a `RecognizedEntitiesCredential` that mimics a
+A malicious actor could create a `RecognizedEntityCredential` that mimics a
 well-known recognizing authority by using a similar `issuer` identifier or name.
 Verifiers who manually add VRCs to their software, that do not independently
 validate the issuer's identifier against a known root of trust, could be deceived
@@ -940,7 +940,7 @@ identifiers through authoritative out-of-band means.<br/><br/>
 
 Note that appropriate bindings to protocols and user interactions (such as an
 individual receiving a request from origin). It would be good if a wallet
-communicates: "I have a recognized entities credential for this origin/issuer from
+communicates: "I have a recognized entity credential for this origin/issuer from
 someone you trust" (if there is a check made that binds request to origin
 -- TLS used, for example) and that's associated with issuer in VRC. It would be
 good for this section to talk about how protocols can bind this sort of
@@ -972,7 +972,7 @@ longer period -- why go longer than 24-48 hours?
 The `outputValidation` property references external schema files via URL. If
 those URLs are not protected by `digestMultibase` or other integrity checks, an
 attacker who compromises the schema host can alter validation rules without
-invalidating the recognized entities credential, causing verifiers to accept credentials
+invalidating the recognized entity credential, causing verifiers to accept credentials
 that no longer conform to the intended schema. This section should discuss the
 importance of using content integrity protection for all externally referenced
 resources.
@@ -982,9 +982,9 @@ resources.
       <section>
         <h3>Verifying Recognition Chains</h3>
         <p class="issue">
-The `recognizedIn` property allows recognized entities credentials to chain to other
+The `recognizedIn` property allows recognized entity credentials to chain to other
 registries such as ETSI Trust Service Lists, X.509 certificate authority lists,
-or other `RecognizedEntitiesCredential`s. A compromised or malicious entry
+or other `RecognizedEntityCredential`s. A compromised or malicious entry
 in a lower-level registry could be transitively trusted if verifiers do not
 enforce depth limits or validate each link in the chain independently. This
 section should discuss safe practices for traversing chained recognition
@@ -1063,7 +1063,7 @@ healthcare, and financial services.
 <strong>Holder-centric sharing:</strong> ETSI Trust Service Lists are
 published at well-known URLs and fetched by relying parties. This
 specification additionally supports "certificate stapling", where a holder
-presents a recognized entities credential directly to a verifier, reducing the need
+presents a recognized entity credential directly to a verifier, reducing the need
 for verifiers to contact a central registry during each interaction.
           </li>
         </ul>
@@ -1115,7 +1115,7 @@ context-specific claims of recognition.
 <strong>Decentralized issuance:</strong> Adding a new CA to existing trust
 stores requires acceptance by browser vendors and/or OS maintainers, which is a
 centralized and often slow process. In contrast, this specification allows any
-entity to issue a `RecognizedEntitiesCredential` and to share it within its
+entity to issue a `RecognizedEntityCredential` and to share it within its
 ecosystem without requiring approval from a central gatekeeper.
           </li>
         </ul>
