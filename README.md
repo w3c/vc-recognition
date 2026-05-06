@@ -18,12 +18,12 @@ You can view the live versions of the documents at the links below:
 
 While we prefer the creation of issues and Pull Requests in the GitHub
 repository, discussions also occur on the
-[public-credentials](http://lists.w3.org/Archives/Public/public-credentials/) mailing list.
+[public-vc-wg](https://lists.w3.org/Archives/Public/public-vc-wg/) mailing list.
 
 ### Other Relevant VC Working Group Repositories
 * [Verifiable Credential Use Cases](https://github.com/w3c/vc-use-cases)
 * [VC Data Model](https://github.com/w3c/vc-data-model)
 
 ### Discussion Forums
-* [W3C Credentials Community Group Mailing List (Incubation)](https://lists.w3.org/Archives/Public/public-credentials/)
 * [W3C Verifiable Credentials WG Mailing List (Standardization)](https://lists.w3.org/Archives/Public/public-vc-wg/)
+* [W3C Credentials Community Group Mailing List (Incubation)](https://lists.w3.org/Archives/Public/public-credentials/)
